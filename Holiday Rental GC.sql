@@ -23,7 +23,7 @@ FROM public.vv_indicators
 LIMIT 10;
 
 SELECT COUNT(*), COUNT(measure), COUNT(area), COUNT(period), COUNT(month_start), COUNT(value)
-FROM public.vv_indicators
+FROM public.vv_indicators;
 
 SELECT
     measure,
@@ -36,13 +36,13 @@ ORDER BY measure;
 
 SELECT measure
 FROM public.vv_indicators
-GROUP BY measure
+GROUP BY measure;
 
 SELECT 
 	month_start, measure, value 
 FROM public.vv_indicators
 WHERE area='Mogán'
-ORDER BY month_start, measure
+ORDER BY month_start, measure;
 
 SELECT
     month_start,
@@ -70,7 +70,7 @@ SELECT
 FROM available_homes
 WHERE measure = 'Viviendas vacacionales disponibles'
 AND area = 'Gran Canaria'
-GROUP BY month_num
+GROUP BY month_num;
 
 SELECT
 	area,
@@ -79,7 +79,7 @@ SELECT
 FROM public.vv_indicators
 WHERE EXTRACT(YEAR FROM month_start) IN ('2019', '2025') AND measure = 'Viviendas vacacionales disponibles'
 	AND area IN ('Agaete', 'Agüimes', 'Artenara', 'Arucas', 'Firgas', 'Gáldar', 'Ingenio', 'La Aldea de San Nicolás', 'Las Palmas de Gran Canaria', 'Mogán', 'Moya', 'San Bartolomé de Tirajana', 'Santa Brígida', 'Santa Lucía de Tirajana', 'Santa María de Guía de Gran Canaria', 'Tejeda', 'Telde', 'Teror', 'Valleseco', 'Valsequillo de Gran Canaria', 'Vega de San Mateo')
-GROUP BY area, EXTRACT(YEAR FROM month_start)
+GROUP BY area, EXTRACT(YEAR FROM month_start);
 
 SELECT
 	area,
@@ -88,7 +88,7 @@ SELECT
 FROM public.vv_indicators
 WHERE measure = 'Viviendas vacacionales disponibles' AND area IN
 	('Agaete', 'Agüimes', 'Artenara', 'Arucas', 'Firgas', 'Gáldar', 'Ingenio', 'La Aldea de San Nicolás', 'Las Palmas de Gran Canaria', 'Mogán', 'Moya', 'San Bartolomé de Tirajana', 'Santa Brígida', 'Santa Lucía de Tirajana', 'Santa María de Guía de Gran Canaria', 'Tejeda', 'Telde', 'Teror', 'Valleseco', 'Valsequillo de Gran Canaria', 'Vega de San Mateo')
-GROUP BY area
+GROUP BY area;
 
 WITH avg_homes_each_yr AS(
 	SELECT
@@ -100,7 +100,6 @@ WITH avg_homes_each_yr AS(
 	AVG(value) FILTER(WHERE EXTRACT(YEAR FROM month_start) = 2023) AS avg_available_homes_2023,
 	AVG(value) FILTER(WHERE EXTRACT(YEAR FROM month_start) = 2024) AS avg_available_homes_2024,
 	AVG(value) FILTER(WHERE EXTRACT(YEAR FROM month_start) = 2025) AS avg_available_homes_2025,
-	AVG(value) FILTER(WHERE EXTRACT(YEAR FROM month_start) = 2026) AS avg_available_homes_2026
 FROM public.vv_indicators
 WHERE measure = 'Viviendas vacacionales disponibles' AND area IN
 	('Agaete', 'Agüimes', 'Artenara', 'Arucas', 'Firgas', 'Gáldar', 'Ingenio', 'La Aldea de San Nicolás', 'Las Palmas de Gran Canaria', 'Mogán', 'Moya', 'San Bartolomé de Tirajana', 'Santa Brígida', 'Santa Lucía de Tirajana', 'Santa María de Guía de Gran Canaria', 'Tejeda', 'Telde', 'Teror', 'Valleseco', 'Valsequillo de Gran Canaria', 'Vega de San Mateo')
@@ -113,14 +112,12 @@ SELECT *,
 	ROUND(avg_available_homes_2023 - avg_available_homes_2022, 1) AS abs_change_22_23,
 	ROUND(avg_available_homes_2024 - avg_available_homes_2023, 1) AS abs_change_23_24,
 	ROUND(avg_available_homes_2025 - avg_available_homes_2024, 1) AS abs_change_24_25,
-	ROUND(avg_available_homes_2026 - avg_available_homes_2025, 1) AS abs_change_25_26,
 	ROUND(100*(avg_available_homes_2020 - avg_available_homes_2019)/avg_available_homes_2019, 1) AS perc_change_19_20,
 	ROUND(100*(avg_available_homes_2021 - avg_available_homes_2020)/avg_available_homes_2020, 1) AS perc_change_20_21,
 	ROUND(100*(avg_available_homes_2022 - avg_available_homes_2021)/avg_available_homes_2021, 1) AS perc_change_21_22,
 	ROUND(100*(avg_available_homes_2023 - avg_available_homes_2022)/avg_available_homes_2022, 1) AS perc_change_22_23,
 	ROUND(100*(avg_available_homes_2024 - avg_available_homes_2023)/avg_available_homes_2023, 1) AS perc_change_23_24,
 	ROUND(100*(avg_available_homes_2025 - avg_available_homes_2024)/avg_available_homes_2024, 1) AS perc_change_24_25,
-	ROUND(100*(avg_available_homes_2026 - avg_available_homes_2025)/avg_available_homes_2025, 1) AS perc_change_25_26,
 	ROUND(100*(avg_available_homes_2025 - avg_available_homes_2019)/avg_available_homes_2019, 1) AS perc_change_19_25,
 	area
 FROM avg_homes_each_yr
@@ -147,11 +144,11 @@ FROM available_homes_compared;
 
 SELECT *
 FROM vv_daily_rates
-LIMIT 10
+LIMIT 10;
 
 SELECT *
 FROM vv_indicators
-LIMIT 10
+LIMIT 10;
 
 WITH monthly_indicators AS (
     SELECT
