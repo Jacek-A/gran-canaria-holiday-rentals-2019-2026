@@ -38,6 +38,7 @@ Tools and files
 - Power BI file
 - Project report
 - Chart examples
+- Data files
 
 Limitations
 
